@@ -1,0 +1,12 @@
+workspace:
+  base: /go
+  path: src/github.com/diego-fu-hs/drone-k8s
+
+pipeline:
+  backend:
+    image: golang
+    commands:
+      - go get
+      - go build
+      - go test
+
