@@ -1,6 +1,6 @@
 workspace:
-  base: /go
-  path: src/github.com/diego-fu-hs/drone-k8s
+   base: /go
+   path: src/github.com/diego-fu-hs/drone-k8s
 
 pipeline:
   backend:
@@ -9,4 +9,19 @@ pipeline:
       - go get
       - go build
       - go test
+      - GOOS=linux GOARCH=amd64 go build -v -o ./build/linux/amd64/drone-k8s .
 
+  docker:
+    secrets: [ docker_username, docker_password ]
+    image: plugins/docker
+    repo: diegofu/drone-k8s
+    tags: latest
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
+
+  deploy:
+    image: quay.io/honestbee/drone-kubernetes
+    deployment: drone-k8s
+    repo: diegofu/drone-k8s
+    tag:
+        - latest
