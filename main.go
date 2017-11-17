@@ -7,5 +7,4 @@ func main() {
 	fmt.Println("vim-go-2")
 	fmt.Println("vim-go-3")
 	fmt.Println("vim-go-4")
-	fmt.Println("dron")
 }
